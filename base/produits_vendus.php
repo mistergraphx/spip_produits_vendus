@@ -30,13 +30,13 @@ function produits_vendus_declarer_tables_objets_sql($tables){
 			'publie'   => 'texte_statut_publie',
 			'refuse'   => 'texte_statut_refuse',
 			'poubelle' => 'texte_statut_poubelle',
-            'produit_vendu'     => 'produits_vendus:texte_statut_vendu'
+            'vendu'     => 'produits_vendus:texte_statut_vendu'
 		),
         'statut'=> array(
 			array(
 				'champ'     => 'statut',
-				'publie'    => 'publie,produit_vendu',
-				'previsu'   => 'publie,prop,prepa,produit_vendu',
+				'publie'    => 'publie,vendu',
+				'previsu'   => 'publie,prop,prepa,vendu',
 				'post_date' => 'date', 
 				'exception' => array('statut','tout')
 			)
@@ -47,7 +47,7 @@ function produits_vendus_declarer_tables_objets_sql($tables){
                 'publie'   => '../prive/themes/spip/images/puce-publier-8.png',
                 'refuse'   => '../prive/themes/spip/images/puce-refuser-8.png',
                 'poubelle' => '../prive/themes/spip/images/puce-supprimer-8.png',
-                'produit_vendu' => '../prive/themes/spip/images/puce-produit_vendu-8.png',
+                'vendu' => 'puce-vendu-8.png',
         )
 	));
 
