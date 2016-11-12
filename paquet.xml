@@ -20,6 +20,7 @@
 	<licence>GNU/GPL</licence>
 
 	<pipeline nom="autoriser" inclure="produits_vendus_autorisations.php" /> 
-
-
+    <pipeline nom="declarer_tables_objets_sql" inclure="base/produits_vendus.php" />
+    
+    <necessite nom="produits" compatibilite="[1.1.10;[" />
 </paquet>
