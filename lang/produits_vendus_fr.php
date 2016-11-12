@@ -8,5 +8,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'produits_vendus_titre' => 'Produits Vendus',
     // T
-    'texte_statut_vendu' => 'vendu'
+    'texte_statut_vendu' => 'vendu',
+    'texte_info_vendu' => 'Vendu',
 );
