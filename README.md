@@ -34,6 +34,8 @@ comme un site d'annonces ou une friperie en ligne.
 ## ToDo
 
 
+Fatal error: Call to undefined function editer_produit_heritage()
+in /spip_produits_vendus/action/editer_produit.php on line 160
 
 ## Travaux
 

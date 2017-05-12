@@ -195,6 +195,33 @@ function produit_vendu_instituer($id_produit, $c, $calcul_rub=true){
 	return '';
 }
 
+// Modifie le produit en calculant les héritages
+function editer_produit_heritage($id_produit, $id_rubrique, $statut, $champs, $cond=true) {
+	// Si on deplace le produit
+	// changer aussi son secteur et sa langue (si héritée)
+	if (isset($champs['id_rubrique'])) {
+		$row_rub = sql_fetsel('id_secteur, lang', 'spip_rubriques', 'id_rubrique='.sql_quote($champs['id_rubrique']));
 
+		$langue = $row_rub['lang'];
+		$champs['id_secteur'] = $row_rub['id_secteur'];
+		// Pour l'instant la langue est toujours héritée de la rubrique donc pas de test
+		$champs['lang'] = $langue;
+#		if (sql_fetsel('1', 'spip_produit', "id_produit=$id_produit and langue_choisie<>'oui' and lang<>" . sql_quote($langue))) {
+#			$champs['lang'] = $langue;
+#		}
+	}
+
+	if (!$champs) return;
+
+	sql_updateq('spip_produits', $champs, "id_produit=$id_produit");
+
+	// Changer le statut des rubriques concernees
+
+	if ($cond) {
+		include_spip('inc/rubriques');
+		$postdate = ($GLOBALS['meta']["post_dates"] == "non" and isset($champs['date']) and (strtotime($champs['date']) < time())) ? $champs['date'] : false;
+		calculer_rubriques_if($id_rubrique, $champs, $statut, $postdate);
+	}
+}
 
 ?>
