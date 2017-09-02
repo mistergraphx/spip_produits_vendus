@@ -18,7 +18,7 @@ function action_editer_produit($arg=null) {
 
 	// si id_produit n'est pas un nombre, c'est une creation
 	if (!$id_produit = intval($arg)) {
-		$id_produit = produit_inserer(_request('id_parent'));
+		$id_produit = produit_vendu_inserer(_request('id_parent'));
 	}
 
 	// Enregistre l'envoi dans la BD
@@ -28,6 +28,73 @@ function action_editer_produit($arg=null) {
 		spip_log("echec editeur produit: $err",_LOG_ERREUR);
 
 	return array($id_produit,$err);
+}
+
+/**
+ * Crée un nouveau produit et retourne son ID
+ *
+ * @param int $id_rubrique
+ * @param array $set
+ *   Un tableau avec les champs par défaut lors de l'insertion
+ * @return int
+ */
+function produit_vendu_inserer($id_rubrique, $set = null) {
+	$id_produit = false;
+
+	// On insère seulement s'il y a une rubrique correcte
+	if ($id_rubrique = intval($id_rubrique)) {
+		$champs = array();
+		// Si id_rubrique vaut 0 ou n'est pas definie, creer le produit dans la premiere rubrique racine
+		if (!$id_rubrique = intval($id_rubrique)) {
+			$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0','', '0+titre,titre', '1');
+			$id_rubrique = $row['id_rubrique'];
+		} else {
+			$row = sql_fetsel('lang, id_secteur', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
+		}
+
+		$lang_rub = $row['lang'];
+		$champs['id_rubrique'] = $id_rubrique;
+		// On propage le secteur
+		$champs['id_secteur'] = $row['id_secteur'];
+
+		// Dans un premier temps La langue a la creation : c'est la langue de la rubrique ou du site
+		$champs['lang'] = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
+
+		// La date de tout de suite
+		$champs['date'] = date('Y-m-d H:i:s');
+
+		// Le statut en cours de redac
+		$champs['statut'] = 'prop';
+
+		if ($set) {
+			$champs = array_merge($champs, $set);
+		}
+
+		// Envoyer aux plugins avant insertion
+		$champs = pipeline(
+			'pre_insertion',
+			array(
+				'args' => array(
+					'table' => 'spip_produits',
+				),
+				'data' => $champs
+			)
+		);
+		// Insérer l'objet
+		$id_produit = sql_insertq('spip_produits', $champs);
+		// Envoyer aux plugins après insertion
+		pipeline(
+			'post_insertion',
+			array(
+				'args' => array(
+					'table' => 'spip_produits',
+				),
+				'data' => $champs
+			)
+		);
+	}
+
+	return $id_produit;
 }
 
 

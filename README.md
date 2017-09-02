@@ -34,10 +34,21 @@ comme un site d'annonces ou une friperie en ligne.
 ## ToDo
 
 
-Fatal error: Call to undefined function editer_produit_heritage()
-in /spip_produits_vendus/action/editer_produit.php on line 160
+- [] Fatal error: Call to undefined function editer_produit_heritage()
+in /spip_produits_vendus/action/editer_produit.php on line 160.  
+idem pour produit_insserer : Question pourquoi la fonction produit_editer_dist qui est sensser surcharger la fonction d'origine
+ne charge pas les fonctions du plugin produit et oblige a dupliquer tout le code ?  
+
+	* utiliser charger_fonction
+
+- [] vérifier le fonctionnement du passage au statut payé/vendu sur les retours paypal/bank 
 
 ## Travaux
+
+1.0.4 :
+
+*	On copie la fonction  la fonction produit_insserer
+pour eviter une erreur php, la surcharge de l'action `_dist` ne charge pas la fonction du plugin produit
 
 1.0.2 :
 
