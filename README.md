@@ -1,7 +1,12 @@
 # Produits vendus
 
-Ajoute le statut vendu sur l'objet produit, surtout utile dans le cas de sites n'ayant pas de stock sur leur produit
+Ou produits uniques …
+ajoute le statut vendu sur l'objet produit,
+ dans le cas de sites n'ayant pas de stock sur leurs produits
 comme un site d'annonces ou une friperie en ligne.
+
+l'internaute ne peut pas ajouter plusieurs fois le même produit au panier.
+
 
 ## Documentations & exemples :
 
@@ -44,6 +49,10 @@ ne charge pas les fonctions du plugin produit et oblige a dupliquer tout le code
 - [] vérifier le fonctionnement du passage au statut payé/vendu sur les retours paypal/bank 
 
 ## Travaux
+
+1.0.6 :
+
+*	on empèche l'ajout produits identiques au panier
 
 1.0.4 :
 
