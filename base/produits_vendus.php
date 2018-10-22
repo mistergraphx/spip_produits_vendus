@@ -21,27 +21,25 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * 		Description complétée des tables
  */
 function produits_vendus_declarer_tables_objets_sql($tables){
-
-
 	array_set_merge($tables, 'spip_produits', array(
-		'statut_textes_instituer'=> array(
-            'prepa'    => 'texte_statut_en_cours_redaction',
-			'prop'     => 'texte_statut_propose_evaluation',
-			'publie'   => 'texte_statut_publie',
-			'refuse'   => 'texte_statut_refuse',
-			'poubelle' => 'texte_statut_poubelle',
-            'vendu'     => 'produits_vendus:texte_statut_vendu'
-		),
-        'statut'=> array(
-			array(
-				'champ'     => 'statut',
-				'publie'    => 'publie,vendu',
-				'previsu'   => 'publie,prop,prepa,vendu',
-				'post_date' => 'date', 
-				'exception' => array('statut','tout')
-			)
-		),
-        'statut_images' => array(
+			'statut_textes_instituer'=> array(
+	      'prepa'    => 'texte_statut_en_cours_redaction',
+				'prop'     => 'texte_statut_propose_evaluation',
+				'publie'   => 'texte_statut_publie',
+				'refuse'   => 'texte_statut_refuse',
+				'poubelle' => 'texte_statut_poubelle',
+	      'vendu'     => 'produits_vendus:texte_statut_vendu'
+			),
+      'statut'=> array(
+				array(
+					'champ'     => 'statut',
+					'publie'    => 'publie,vendu',
+					'previsu'   => 'publie,prop,prepa,vendu',
+					'post_date' => 'date',
+					'exception' => array('statut','tout')
+				)
+			),
+      'statut_images' => array(
                 'prepa'    => '../prive/themes/spip/images/puce-preparer-8.png',
                 'prop'     => '../prive/themes/spip/images/puce-proposer-8.png',
                 'publie'   => '../prive/themes/spip/images/puce-publier-8.png',

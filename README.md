@@ -1,3 +1,5 @@
+**Ce plugin n'est plus maintenu il peut désormait être remplacé par le plugin Stocks  https://contrib.spip.net/Stocks**
+
 # Produits vendus
 
 Ou produits uniques …
@@ -20,14 +22,14 @@ l'internaute ne peut pas ajouter plusieurs fois le même produit au panier.
 
 ```html
     <BOUCLE_test_produit_vendu(CONDITION){si #STATUT|!={vendu}}>
-    
+
         [<div class="ajouter_panier">(#BOUTON_ACTION{<:paniers:action_ajouter:>,
             #URL_ACTION_AUTEUR{
                 remplir_panier,
                 produit-#ID_PRODUIT-1,
                 #SELF|ancre_url{popup_panier} }
         })</div>]
-    
+
     </BOUCLE_test_produit_vendu>
 
             <div class="btn btn-tertiary vendu"><:produits_vendus:texte_info_vendu:></div>
@@ -46,7 +48,7 @@ ne charge pas les fonctions du plugin produit et oblige a dupliquer tout le code
 
 	* utiliser charger_fonction
 
-- [] vérifier le fonctionnement du passage au statut payé/vendu sur les retours paypal/bank 
+- [] vérifier le fonctionnement du passage au statut payé/vendu sur les retours paypal/bank
 
 ## Travaux
 
